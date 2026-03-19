@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Pulse - Smart Resume Analysis & Placement Predictor</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i> <span style="color: white; font-weight: 700;">Placement</span><span style="color: var(--secondary);">Pulse</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li class="auth-required" style="display:none;"><a href="#" onclick="showSection('home')">Home</a></li>
+            <li class="auth-required" style="display:none;"><a href="#" onclick="showSection('upload')">Upload</a></li>
+            <li class="auth-required" style="display:none;"><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+            <li class="auth-required" style="display:none;"><a href="#" onclick="logoutUser()" style="color:var(--danger)">Logout <span id="userNameDisplay"></span></a></li>
+        </ul>
+    </nav>
+
+    <!-- AUTH SECTION -->
+    <section id="auth" class="section-container active">
+        <div class="hero">
+            <div class="hero-content">
+                <span class="badge" style="margin-bottom: 1.5rem; display: inline-block;">AI-Powered Placement Readiness</span>
+                <h1 style="font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem;">
+                    Predict Your <br> Success with <br>
+                    <span style="color: white;">Placement</span><span style="color: var(--secondary);">Pulse</span>
+                </h1>
+                <p>Enter your academic details and upload your resume to get an accurate ATS score, placement probability, and actionable growth suggestions.</p>
+            </div>
+            
+            <div class="hero-image">
+                <div class="glass auth-glass-card" style="box-shadow: 0 0 50px rgba(37, 99, 235, 0.15);">
+                    <div class="mac-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    
+                    <div id="loginBox">
+                        <h2 style="margin-bottom: 1.5rem; margin-top: 0.5rem; font-size: 1.5rem;"><i class="fa-solid fa-lock"></i> Welcome Back</h2>
+                        <form id="loginForm" class="upload-form">
+                            <div class="input-group">
+                                <label>Name or Email</label>
+                                <input type="text" id="loginName" placeholder="John Doe" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Password</label>
+                                <input type="password" id="loginPassword" placeholder="••••••••" required>
+                            </div>
+                            <div id="loginError" class="file-name" style="color: var(--danger); display:none;"></div>
+                            <button type="submit" class="btn-primary full-width" style="box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);">Login to Account</button>
+                            <p style="text-align:center; margin-top:1.5rem; color:var(--text-muted); font-size: 0.9rem;">
+                                Don't have an account? <a href="#" onclick="toggleAuth('register')" class="highlight">Register Here</a>
+                            </p>
+                        </form>
+                    </div>
+
+                    <div id="registerBox" style="display: none;">
+                        <h2 style="margin-bottom: 1.5rem; margin-top: 0.5rem; font-size: 1.5rem;"><i class="fa-solid fa-user-plus"></i> Create Account</h2>
+                        <form id="registerForm" class="upload-form">
+                            <div class="input-group">
+                                <label>Full Name</label>
+                                <input type="text" id="regName" placeholder="John Doe" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Email</label>
+                                <input type="email" id="regEmail" placeholder="john@example.com" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Password</label>
+                                <input type="password" id="regPassword" placeholder="••••••••" required>
+                            </div>
+                            <div id="regError" class="file-name" style="color: var(--danger); display:none;"></div>
+                            <button type="submit" class="btn-primary full-width" style="box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);">Register Securely</button>
+                            <p style="text-align:center; margin-top:1.5rem; color:var(--text-muted); font-size: 0.9rem;">
+                                Already have an account? <a href="#" onclick="toggleAuth('login')" class="highlight">Login</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOME SECTION -->
+    <section id="home" class="section-container" style="display:none;">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="gradient-text">Predict Your Placement with Placement Pulse</h1>
+                <p>Upload your resume, analyze skill gaps, predict placement probabilities, and generate custom interview questions.</p>
+                <button class="btn-primary" onclick="showSection('upload')">Analyze My Profile <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card c1">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>95% Prediction Accuracy</span>
+                </div>
+                <div class="floating-card c2">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Smart Parsing</span>
+                </div>
+                <div class="floating-card c3">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <span>AI Mock Interviews</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UPLOAD SECTION -->
+    <section id="upload" class="section-container">
+        <div class="upload-wrapper">
+            <h2><i class="fa-solid fa-cloud-arrow-up"></i> Analyze Your Profile</h2>
+            <form id="uploadForm" class="upload-form" enctype="multipart/form-data">
+
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe" required>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>CGPA (out of 10)</label>
+                        <input type="number" step="0.01" id="cgpa" placeholder="8.5" required>
+                    </div>
+                    <div class="input-group">
+                        <label>DSS Score (0-100)</label>
+                        <input type="number" id="dss" placeholder="75" required>
+                    </div>
+                </div>
+                
+                <div class="file-upload-box" id="dropArea">
+                    <i class="fa-solid fa-file-import fa-3x"></i>
+                    <p>Drag & Drop your Resume (PDF/DOCX) or <span class="highlight">Browse</span></p>
+                    <input type="file" id="resumeFile" accept=".pdf,.docx" hidden required>
+                </div>
+                <p class="file-name" id="fileName"></p>
+
+                <div class="checkbox-group">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="wantQuestions" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">Generate AI Mock Interview Questions</span>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="wantStrategy" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">Show Company-Wise Strategies & Packages</span>
+                </div>
+
+                <button type="submit" class="btn-primary full-width" id="submitBtn">
+                    Analyze & Predict <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+            </form>
+            <div id="loader" class="loader-container hidden">
+                <div class="spinner"></div>
+                <p>AI is analyzing your profile...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD SECTION -->
+    <section id="dashboard" class="section-container" style="display: none;">
+        <div class="dashboard-header">
+            <h2>Your Placement Dashboard</h2>
+            <p>Here are your personalized insights based on your resume and scores.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Probability Card -->
+            <div class="dash-card main-card glass">
+                <h3>Placement Probability</h3>
+                <div class="circular-progress">
+                    <div class="value-container" id="probValue">0%</div>
+                </div>
+                <p class="insight-text" id="probInsight">You have a strong chance. Keep polishing your skills!</p>
+            </div>
+
+            <!-- Stats Card -->
+            <div class="dash-card stats-card glass">
+                <div class="stat-item">
+                    <h4>ATS/Resume Score</h4>
+                    <div class="progress-bar"><div class="fill" id="resumeScoreBar" style="width: 0%"></div></div>
+                    <span id="resumeScoreTxt">0/100</span>
+                </div>
+                <div class="stat-item">
+                    <h4>Detected Skills</h4>
+                    <div class="skills-tags" id="skillsTags">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <h4>Skill Gaps Found</h4>
+                    <div class="skills-tags missing" id="missingSkillsTags">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jobs Card -->
+            <div class="dash-card full-card glass">
+                <h3><i class="fa-solid fa-building-user"></i> Placement Eligibility & Roles</h3>
+                <div class="jobs-row">
+                    <div class="job-col">
+                        <h4>Recommended Roles</h4>
+                        <ul id="recRoles"></ul>
+                    </div>
+                    <div class="job-col">
+                        <h4>Eligible Companies</h4>
+                        <ul id="recCompanies"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Resources Card -->
+            <div class="dash-card full-card glass" id="resourcesCard">
+                <h3><i class="fa-solid fa-book-open-reader"></i> Actionable Growth & Learning Resources</h3>
+                <p class="sub-text" style="color: var(--text-muted); margin-bottom: 1rem;">Recommended free courses to close your skill gaps and secure top placements:</p>
+                
+                <div class="resource-search-container">
+                    <input type="text" id="skillSearchInput" placeholder="What else do you want to learn? (e.g. Docker, React, etc.)">
+                    <button id="skillSearchBtn"><i class="fa-solid fa-magnifying-glass"></i> Explore</button>
+                </div>
+                
+                <div class="resources-grid" id="resourcesList">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <!-- Strategy Card -->
+            <div class="dash-card full-card glass" id="strategyCard" style="display: none;">
+                <h3><i class="fa-solid fa-chess-knight"></i> Company-Wise Strategy</h3>
+                <p class="sub-text">Recommended preparation path for your target companies:</p>
+                <div class="strategy-list" id="strategyList">
+                    <!-- Filled by JS -->
+                </div>
+                <hr style="margin: 2rem 0; border-color: rgba(255,255,255,0.05);">
+                <h3><i class="fa-solid fa-file-code"></i> RAW Extracted Text</h3>
+                <p class="sub-text">This is exactly what the AI algorithms see when grading your document:</p>
+                <div class="raw-text-box" id="rawTextDisplay">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <!-- Questions Card -->
+            <div class="dash-card full-card glass" id="questionsCard" style="display: none;">
+                <h3><i class="fa-solid fa-clipboard-question"></i> AI Mock Interview Questions</h3>
+                <p class="sub-text">Based on your extracted skills:</p>
+                <div class="accordion" id="questionsList">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
