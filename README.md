@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # 🎓 Placement Pulse - Smart Career Analysis & Prediction
 
-Placement Pulse is a high-performance, **Node.js-based** career intelligence platform designed to empower students for recruitment success. It combines advanced document parsing, heuristic-driven AI modeling, and personalized learning roadmaps to provide a modern, "Hackathon-Ready" solution for placement readiness.
+Placement Pulse is a high-performance, **Node.js-based** career intelligence platform designed to empower students for recruitment success. It combines advanced document parsing, heuristic-driven AI modeling, and personalized learning roadmaps to provide a modern, "Hackathon-Ready" solution for placement readiness.//
 
 ---
 
@@ -94,7 +94,3 @@ Navigate to `http://localhost:8080`.
 
 ## 🎯 Project Aim
 The core aim of **Placement Pulse** is to bridge the gap between "Learning" and "Employment" by providing students with an objective, data-backed view of their market readiness and a personalized roadmap to close their skill gaps before their dream placements arrive.
-=======
-# ResumeAnalyzer
-This is my hackathon project
->>>>>>> 21c0e468873e17438da411edfd77ded81f409d43
