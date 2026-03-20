@@ -1,96 +1,120 @@
-<<<<<<< HEAD
-# 🎓 Placement Pulse - Smart Career Analysis & Prediction
+# 🎓 Placement Pulse — Smart Career Analysis & Prediction
 
-Placement Pulse is a high-performance, **Node.js-based** career intelligence platform designed to empower students for recruitment success. It combines advanced document parsing, heuristic-driven AI modeling, and personalized learning roadmaps to provide a modern, "Hackathon-Ready" solution for placement readiness.
-
----
-
-## 🏗️ The Tech Stack (Under the Hood)
-
-The platform is architected for speed, modularity, and high-fidelity UI/UX without the overhead of heavy frameworks.
-
-### **Frontend Architecture**
-- **Core:** HTML5 & Vanilla JavaScript (ES6+). No bulky React/Vue dependencies.
-- **Styling:** Custom-built **Glassmorphism Design System** using CSS3 Variables, Backdrop-filters, and advanced Grid/Flexbox layouts.
-- **Iconography:** FontAwesome 6.4 (Solid/Brands stacks).
-- **Typography:** Google Fonts (Outfit & Inter) for a sleek, premium SaaS appearance.
-- **Visuals:** Chart.js integration for real-time statistical rendering (Placement Probabilities).
-
-### **Backend Architecture**
-- **Runtime:** Node.js (v16+) with the **Express.js** framework.
-- **Authentication:** Custom **Auth Module** using in-memory data structures and LocalStorage session persistence.
-- **File Handling:** `Multer` middleware for high-speed multipart/form-data upload streams.
-- **Parsing Engines:** 
-    - `pdf-parse`: NLP extraction from raw unstructured PDF data.
-    - `mammoth`: Structural text conversion from `.docx` (Microsoft Word) documents.
-- **Networking:** `CORS` enabled for cross-origin frontend-to-backend communication.
+> **Hackathon Project** | Empowering students with AI-driven placement readiness in seconds.
 
 ---
 
-## 🧠 AI & Heuristic Logic (ML Simulation)
+## 🏆 What Is Placement Pulse?
 
-Instead of using a generic, heavy ML model, Placement Pulse uses a specialized **Deterministic Heuristic Algorithm** written in JavaScript. This allows for instant results and high interpretability.
+**Placement Pulse** is a full-stack career intelligence platform that analyzes a student's resume and instantly generates a personalized placement readiness report — including a placement probability score, skill gap analysis, role recommendations, and a mock interview question bank.
 
-### **1. Placement Probability Algorithm**
-The final "Placement %" is calculated using a weighted multi-factor formula:
-- **Academic Score (35% Weight):** Based on your CGPA.
-- **Domain Competency (25% Weight):** Your DSS (Domain Skill Score).
-- **Practical Exposure (20% Weight):** Estimated count of projects found in your resume.
-- **Document Quality (10% Weight):** An ATS-style **Resume Score** calculated by the parser (word count, keyword density, section headers).
-- **Skill Breadth (10% Weight):** Comparison of your detected skills vs the global industry requirement list.
-
-### **2. Skill Gap & Learning Matcher**
-The system performs a case-insensitive **set-difference analysis**. It maps your extracted resume skills against a curated `MASTER_SKILLS` tech stack. For every missing skill, it dynamically generates:
-- A justification of why that skill matters.
-- A direct link to a top-tier learning resource (FreeCodeCamp, MDN, Coursera, or YouTube deep-dives).
-
-### **3. AI Interview Question Generator**
-A mapping logic that analyzes your unique skill set and selects the most relevant technical questions and "Ideal Responses" from a high-quality technical dictionary, ensuring your mock interview is 100% personalized.
+No heavy ML models. No cloud dependencies. Just fast, deterministic, interpretable heuristics that run entirely on a local Node.js server.
 
 ---
 
-## 📂 Project Directory Structure
+## ✨ Key Features
 
-```text
-resumeanlyzer/
+- **Resume Parsing** — Upload a PDF or DOCX resume; the backend extracts skills, projects, CGPA, and document quality metrics automatically.
+- **Placement Probability Score** — A weighted multi-factor formula estimates your likelihood of placement as a percentage.
+- **Skill Gap Analysis** — Compares your skills against an industry master list and suggests targeted learning resources (FreeCodeCamp, MDN, Coursera, YouTube).
+- **Role & Company Recommendations** — Suggests job roles and target companies based on your score and detected skill set.
+- **AI Mock Interview Generator** — Generates personalized technical interview questions and ideal answers mapped to your specific skills.
+- **User Authentication** — Register and log in; sessions persist via localStorage with MongoDB user storage.
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | HTML5, Vanilla JS (ES6+), CSS3 (Glassmorphism), Chart.js, FontAwesome 6.4, Google Fonts |
+| Backend | Node.js (v16+), Express.js |
+| Database | MongoDB (via Mongoose) |
+| File Upload | Multer |
+| Resume Parsing | `pdf-parse` (PDF), `mammoth` (DOCX) |
+| Cross-Origin | CORS |
+
+---
+
+## 🧠 How the AI Logic Works
+
+### Placement Probability Algorithm
+The score is a weighted sum of five factors:
+
+| Factor | Weight | Source |
+|---|---|---|
+| Academic Score (CGPA) | 35% | User input |
+| Domain Skill Score (DSA) | 30% | Resume skill matching |
+| Resume Quality (ATS Score) | 10% | Word count, keyword density, section headers |
+| Skill Breadth | 15% | Skills detected vs. master industry list |
+| Project Count | 10% | Projects found in resume |
+
+### Skill Gap Matcher
+Set-difference analysis between detected resume skills and a curated `MASTER_SKILLS` list. For every gap, the system generates a justification and a direct learning resource link.
+
+### Mock Interview Generator
+A skill-to-question mapping dictionary selects the most relevant technical questions and ideal answers for your unique skill profile.
+
+---
+
+## 📂 Project Structure
+
+```
+ResumeAnalyzer/
 ├── backend/
-│   ├── utils/
-│   │   ├── resumeParser.js      # Extraction logic for PDF/DOCX + Skill Mapping
-│   │   └── questionGenerator.js # Logic for skill-based Mock Q&A
-│   ├── uploads/                 # Temporary processing directory
-│   ├── server.js                # Express API & Auth Logic
-│   └── package.json             # Backend dependencies
+│   ├── server.js                # Express API, Auth, Predict & Question endpoints
+│   ├── package.json             # Backend dependencies
+│   ├── uploads/                 # Temporary file storage (auto-cleaned)
+│   └── utils/
+│       ├── resumeParser.js      # PDF/DOCX extraction + skill mapping logic
+│       └── questionGenerator.js # Skill-based mock Q&A generator
 └── frontend/
-    ├── index.html               # Main Dashboard Interface
+    ├── index.html               # Main single-page dashboard
     ├── css/
-    │   └── styles.css           # Premium Glassmorphism Stylings
+    │   └── styles.css           # Premium Glassmorphism design system
     └── js/
-        └── main.js              # State Management & API Communication
+        └── main.js              # State management & API communication
 ```
 
 ---
 
-## 🚀 Quick Setup & Installation
+## 🚀 Quick Start
 
-### **1. Setup the Backend (Node.js)**
+### Prerequisites
+- Node.js v16+
+- MongoDB running locally on port `27017`
+
+### 1. Start the Backend
 ```bash
 cd backend
 npm install
 node server.js
 ```
-The server will start listening on `http://localhost:5000`. 
-> [!IMPORTANT]
-> Ensure you have **MongoDB** installed and running locally on port 27017 for user persistence.
+The API will be available at `http://localhost:5000`.
 
-### **2. Launch the Web App**
-You can open `frontend/index.html` directly, but for best performance (CORS handling), serve it via a local server:
+### 2. Launch the Frontend
 ```bash
 cd frontend
 python -m http.server 8080
 ```
-Navigate to `http://localhost:8080`.
+Open `http://localhost:8080` in your browser.
+
+> **Note:** Serving via `python -m http.server` avoids browser CORS restrictions when the frontend calls the backend API.
 
 ---
 
-## 🎯 Project Aim
-The core aim of **Placement Pulse** is to bridge the gap between "Learning" and "Employment" by providing students with an objective, data-backed view of their market readiness and a personalized roadmap to close their skill gaps before their dream placements arrive.
+## 🔌 API Endpoints
+
+| Method | Route | Description |
+|---|---|---|
+| `POST` | `/api/register` | Register a new user |
+| `POST` | `/api/login` | Login with name/email + password |
+| `POST` | `/api/upload` | Upload a resume (PDF/DOCX); returns parsed data |
+| `POST` | `/predict` | Submit parsed data; returns placement probability, roles, companies |
+| `POST` | `/generate-questions` | Submit skills array; returns personalized mock interview Q&A |
+
+---
+
+## 🎯 Project Goal
+
+Placement Pulse bridges the gap between **learning** and **employment** by giving students an objective, data-backed view of their market readiness and a personalized roadmap to close skill gaps before their campus placements arrive.

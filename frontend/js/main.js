@@ -150,7 +150,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
             name: document.getElementById('fullName').value,
             email: document.getElementById('email').value,
             cgpa: parseFloat(document.getElementById('cgpa').value),
-            dss_score: parseFloat(document.getElementById('dss').value),
+            dsa_score: parseFloat(document.getElementById('dsa').value),
             skills_count: resumeAnalysis.skills_count,
             resume_score: resumeAnalysis.resume_score,
             projects_count: resumeAnalysis.projects_est,
